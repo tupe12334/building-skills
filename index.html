@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Skills</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="deck">
+
+    <!-- ─── SLIDE 0: HERO ─── -->
+    <div class="slide active" id="s0">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+        <!-- E-ink refresh flicker lines -->
+        <rect class="flicker" x="0" y="0" width="800" height="500" fill="none" />
+
+        <!-- Title -->
+        <text x="400" y="190" text-anchor="middle" class="t-hero">Building Skills</text>
+        <text x="400" y="245" text-anchor="middle" class="t-sub">Algorithm · Skill · LLM</text>
+
+        <!-- Decorative rule -->
+        <line x1="200" y1="268" x2="600" y2="268" class="rule-line" />
+
+        <!-- Eyebrow -->
+        <text x="400" y="300" text-anchor="middle" class="t-eyebrow">AI Week · 2026</text>
+
+        <!-- Animated ink cursor blink -->
+        <rect x="395" y="310" width="10" height="2" class="cursor-blink" />
+
+        <!-- Keyboard hint -->
+        <text x="400" y="470" text-anchor="middle" class="t-eyebrow" style="opacity:0.35">press → to begin</text>
+      </svg>
+    </div>
+
+    <!-- ─── SLIDE 1: WHY SKILLS ─── -->
+    <div class="slide" id="s1">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+
+        <text x="400" y="42" text-anchor="middle" class="t-label">why build skills?</text>
+
+        <!-- Left: ad-hoc (dashed border = unstable) -->
+        <g class="reveal-group" style="--d:0.1s">
+          <text x="192" y="80" text-anchor="middle" class="t-fail-label">ad hoc</text>
+          <rect x="44" y="90" width="296" height="290" class="box-failure" />
+          <text x="192" y="126" text-anchor="middle" class="t-caption">prompt → Claude improvises</text>
+
+          <rect x="68" y="140" width="240" height="38" class="box-mono" />
+          <text x="92" y="163" class="t-mono-faint">run A — verbose, 80 chars</text>
+
+          <rect x="68" y="190" width="160" height="38" class="box-mono" />
+          <text x="92" y="213" class="t-mono-faint">run B — missed steps</text>
+
+          <rect x="68" y="240" width="200" height="38" class="box-mono" />
+          <text x="92" y="263" class="t-mono-faint">run C — style drift</text>
+
+          <text x="192" y="340" text-anchor="middle" class="t-caption">quality varies · not shareable</text>
+        </g>
+
+        <!-- Centre: SKILL.md captures it -->
+        <g class="reveal-group" style="--d:0.45s">
+          <rect x="353" y="200" width="94" height="26" class="file-tab" />
+          <text x="400" y="217" text-anchor="middle" class="t-filetab">SKILL.md</text>
+          <line x1="344" y1="237" x2="452" y2="237" class="connector-h" />
+          <polygon points="447,231 460,237 447,243" class="arrowhead" />
+        </g>
+
+        <!-- Right: skill-powered (solid border = stable) -->
+        <g class="reveal-group" style="--d:0.7s">
+          <text x="608" y="80" text-anchor="middle" class="t-tag">skill-powered</text>
+          <rect x="460" y="90" width="296" height="290" class="box-main" />
+          <text x="608" y="126" text-anchor="middle" class="t-caption">trigger → defined steps run</text>
+
+          <rect x="484" y="140" width="248" height="38" class="box-mono" />
+          <text x="508" y="163" class="t-mono-faint">run A — ≤50 chars · fmt ✓</text>
+
+          <rect x="484" y="190" width="248" height="38" class="box-mono" />
+          <text x="508" y="213" class="t-mono-faint">run B — ≤50 chars · fmt ✓</text>
+
+          <rect x="484" y="240" width="248" height="38" class="box-mono" />
+          <text x="508" y="263" class="t-mono-faint">run C — ≤50 chars · fmt ✓</text>
+
+          <text x="608" y="340" text-anchor="middle" class="t-caption">repeatable · auto-invoked · shareable</text>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- ─── SLIDE 2: THE SPECTRUM ─── -->
+    <div class="slide" id="s2">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+
+        <!-- Axis label -->
+        <g class="reveal-group" style="--d:0s">
+          <line x1="60" y1="430" x2="740" y2="430" class="axis-line" />
+          <polygon points="735,424 748,430 735,436" class="arrowhead" />
+          <text x="60"  y="460" class="t-axis">← deterministic</text>
+          <text x="740" y="460" text-anchor="end" class="t-axis">probabilistic →</text>
+        </g>
+
+        <!-- Algorithm node -->
+        <g class="reveal-group" style="--d:0.15s">
+          <rect x="40" y="130" width="180" height="240" class="box-main" />
+          <!-- pixel grid -->
+          <line x1="60" y1="170" x2="200" y2="170" class="grid-line" />
+          <line x1="60" y1="210" x2="200" y2="210" class="grid-line" />
+          <line x1="60" y1="250" x2="200" y2="250" class="grid-line" />
+          <line x1="60" y1="290" x2="200" y2="290" class="grid-line" />
+          <line x1="60" y1="330" x2="200" y2="330" class="grid-line" />
+          <line x1="113" y1="170" x2="113" y2="370" class="grid-line" />
+          <line x1="147" y1="170" x2="147" y2="370" class="grid-line" />
+          <text x="130" y="115" text-anchor="middle" class="t-label">Algorithm</text>
+          <text x="130" y="395" text-anchor="middle" class="t-caption">same input</text>
+          <text x="130" y="413" text-anchor="middle" class="t-caption">always same output</text>
+          <!-- tick on axis -->
+          <line x1="130" y1="420" x2="130" y2="440" class="axis-tick" />
+        </g>
+
+        <!-- Skill node (centre, bigger) -->
+        <g class="reveal-group" style="--d:0.4s">
+          <rect x="310" y="100" width="180" height="270" class="box-skill" />
+          <!-- half-grid half-wave inside -->
+          <line x1="330" y1="160" x2="470" y2="160" class="grid-line" />
+          <line x1="330" y1="210" x2="470" y2="210" class="grid-line" />
+          <line x1="330" y1="260" x2="470" y2="260" class="grid-line" />
+          <path d="M330,310 Q360,295 400,310 Q440,325 470,310" class="wave-line" />
+          <text x="400" y="85"  text-anchor="middle" class="t-skill">Skill</text>
+          <text x="400" y="395" text-anchor="middle" class="t-caption">defined steps</text>
+          <text x="400" y="413" text-anchor="middle" class="t-caption">constrained · not hardcoded</text>
+          <line x1="400" y1="370" x2="400" y2="440" class="axis-tick" />
+        </g>
+
+        <!-- LLM node -->
+        <g class="reveal-group" style="--d:0.65s">
+          <path d="M580,130 Q610,160 580,210 Q615,260 580,310 Q610,340 580,370
+                   L760,370 Q790,340 760,310 Q795,260 760,210 Q795,160 760,130 Z"
+                class="box-wavy" />
+          <text x="670" y="115" text-anchor="middle" class="t-label">LLM</text>
+          <text x="670" y="395" text-anchor="middle" class="t-caption">adapts freely</text>
+          <text x="670" y="413" text-anchor="middle" class="t-caption">unpredictable shape</text>
+          <line x1="670" y1="370" x2="670" y2="440" class="axis-tick" />
+        </g>
+
+        <!-- Connectors between nodes -->
+        <g class="reveal-group" style="--d:0.8s">
+          <line x1="220" y1="250" x2="310" y2="250" class="connector-h" />
+          <text x="265" y="240" text-anchor="middle" class="t-connector">more</text>
+          <text x="265" y="256" text-anchor="middle" class="t-connector">structured</text>
+
+          <line x1="490" y1="250" x2="580" y2="250" class="connector-h" />
+          <text x="535" y="240" text-anchor="middle" class="t-connector">more</text>
+          <text x="535" y="256" text-anchor="middle" class="t-connector">open</text>
+        </g>
+
+        <!-- Animated flow dot left→right on axis -->
+        <defs>
+          <path id="axis-path" d="M60,430 L740,430" />
+        </defs>
+        <circle r="5" class="axis-dot">
+          <animateMotion dur="3s" repeatCount="indefinite" begin="1s">
+            <mpath href="#axis-path" />
+          </animateMotion>
+        </circle>
+
+      </svg>
+    </div>
+
+    <!-- ─── SLIDE 3: FETCH vs UNDERSTAND ─── -->
+    <div class="slide" id="s3">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+        <!-- Data blob entering left -->
+        <g class="reveal-group" style="--d:0s">
+          <circle cx="80" cy="250" r="45" class="data-blob" />
+          <text x="80" y="245" text-anchor="middle" class="t-caption">data</text>
+          <text x="80" y="262" text-anchor="middle" class="t-caption">in</text>
+        </g>
+
+        <!-- Animated data flow -->
+        <path id="path-fetch"  d="M125,250 L330,150" fill="none" />
+        <path id="path-under"  d="M125,250 L330,350" fill="none" />
+
+        <circle r="6" class="flow-dot-fetch">
+          <animateMotion dur="1.2s" repeatCount="indefinite" begin="0.5s">
+            <mpath href="#path-fetch" />
+          </animateMotion>
+        </circle>
+        <circle r="6" class="flow-dot-under">
+          <animateMotion dur="1.2s" repeatCount="indefinite" begin="1.1s">
+            <mpath href="#path-under" />
+          </animateMotion>
+        </circle>
+
+        <!-- Split lines -->
+        <g class="reveal-group" style="--d:0.4s">
+          <line x1="125" y1="250" x2="330" y2="150" class="split-line-algo" />
+          <line x1="125" y1="250" x2="330" y2="350" class="split-line-llm" />
+          <text x="210" y="175" class="t-route-label">fetch?</text>
+          <text x="210" y="375" class="t-route-label">understand?</text>
+        </g>
+
+        <!-- Algo box -->
+        <g class="reveal-group" style="--d:0.7s">
+          <rect x="330" y="90" width="200" height="120" class="box-main" />
+          <text x="430" y="140" text-anchor="middle" class="t-label">Algorithm</text>
+          <text x="430" y="163" text-anchor="middle" class="t-caption">git · grep · read</text>
+          <text x="430" y="183" text-anchor="middle" class="t-caption">deterministic</text>
+        </g>
+
+        <!-- LLM box -->
+        <g class="reveal-group" style="--d:0.7s">
+          <rect x="330" y="290" width="200" height="120" class="box-main" />
+          <text x="430" y="340" text-anchor="middle" class="t-label">LLM</text>
+          <text x="430" y="363" text-anchor="middle" class="t-caption">classify · summarize</text>
+          <text x="430" y="383" text-anchor="middle" class="t-caption">probabilistic</text>
+        </g>
+
+        <!-- Examples right side -->
+        <g class="reveal-group" style="--d:1s">
+          <line x1="530" y1="150" x2="590" y2="150" class="example-line" />
+          <text x="598" y="125" class="t-example">file exists?</text>
+          <text x="598" y="145" class="t-example">git diff raw</text>
+          <text x="598" y="165" class="t-example">count lines</text>
+
+          <line x1="530" y1="350" x2="590" y2="350" class="example-line" />
+          <text x="598" y="325" class="t-example">file relevant?</text>
+          <text x="598" y="345" class="t-example">diff meaning?</text>
+          <text x="598" y="365" class="t-example">classify error</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- ─── SLIDE 4: SKILL.MD ANATOMY ─── -->
+    <div class="slide" id="s4">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+        <!-- File card -->
+        <rect x="120" y="40" width="560" height="400" class="box-main" />
+
+        <!-- File tab -->
+        <rect x="120" y="20" width="220" height="28" class="file-tab" />
+        <text x="230" y="38" text-anchor="middle" class="t-filetab">skills/my-skill/SKILL.md</text>
+
+        <!-- Frontmatter section (highlighted) -->
+        <rect x="120" y="48" width="560" height="110" class="section-front" />
+        <text x="148" y="75"  class="t-code c-punct">---</text>
+        <text x="148" y="97"  class="t-code"><tspan class="c-key">name</tspan><tspan class="c-punct">: </tspan><tspan class="c-val">my-skill</tspan></text>
+        <text x="148" y="119" class="t-code"><tspan class="c-key">description</tspan><tspan class="c-punct">: &gt;</tspan></text>
+        <text x="168" y="141" class="t-code c-comment">← Claude reads this to auto-invoke</text>
+        <text x="148" y="160" class="t-code c-punct">---</text>
+
+        <!-- Body section -->
+        <text x="148" y="195" class="t-code c-comment"># Step 1 — Gather  ← algorithm</text>
+        <text x="148" y="217" class="t-code c-val">Run `git log`. Read files. Call APIs.</text>
+
+        <text x="148" y="252" class="t-code c-comment"># Step 2 — Reason  ← LLM</text>
+        <text x="148" y="274" class="t-code c-val">Given data above, classify / summarize.</text>
+
+        <text x="148" y="309" class="t-code c-comment"># Step 3 — Act     ← both</text>
+        <text x="148" y="331" class="t-code c-val">Write result. Open PR. Notify user.</text>
+
+        <!-- Animated cursor -->
+        <rect x="148" y="348" width="8" height="16" class="cursor-blink" rx="1" />
+
+        <!-- Annotation: frontmatter bracket -->
+        <g class="reveal-group" style="--d:0.5s">
+          <line x1="700" y1="58" x2="720" y2="58"   class="ann-tick" />
+          <line x1="720" y1="58" x2="720" y2="158"  class="ann-bracket" />
+          <line x1="700" y1="158" x2="720" y2="158"  class="ann-tick" />
+          <text x="728" y="95"  class="t-ann">routing</text>
+          <text x="728" y="115" class="t-ann">trigger</text>
+          <text x="728" y="135" class="t-ann">logic</text>
+        </g>
+
+        <!-- Annotation: body bracket -->
+        <g class="reveal-group" style="--d:0.8s">
+          <line x1="700" y1="178" x2="720" y2="178" class="ann-tick" />
+          <line x1="720" y1="178" x2="720" y2="348" class="ann-bracket" />
+          <line x1="700" y1="348" x2="720" y2="348" class="ann-tick" />
+          <text x="728" y="250" class="t-ann">workflow</text>
+          <text x="728" y="270" class="t-ann">steps</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- ─── SLIDE 5: DISTILLATION FUNNEL ─── -->
+    <div class="slide" id="s5">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+        <!-- Heading -->
+        <text x="400" y="45" text-anchor="middle" class="t-label">Do it manually → distil → skill</text>
+
+        <!-- Funnel outline -->
+        <g class="reveal-group" style="--d:0s">
+          <polygon points="80,70 720,70 540,220 260,220" class="funnel-top" />
+          <text x="400" y="135" text-anchor="middle" class="t-label">manual task</text>
+          <text x="400" y="160" text-anchor="middle" class="t-caption">anything you do repeatedly</text>
+        </g>
+
+        <g class="reveal-group" style="--d:0.3s">
+          <polygon points="260,220 540,220 460,340 340,340" class="funnel-mid" />
+          <text x="400" y="262" text-anchor="middle" class="t-caption">What did I fetch?</text>
+          <text x="400" y="284" text-anchor="middle" class="t-caption">What did I decide?</text>
+          <text x="400" y="306" text-anchor="middle" class="t-caption">What triggered me?</text>
+        </g>
+
+        <g class="reveal-group" style="--d:0.6s">
+          <polygon points="340,340 460,340 430,420 370,420" class="funnel-bot" />
+          <text x="400" y="390" text-anchor="middle" class="t-skill">SKILL.md</text>
+        </g>
+
+        <!-- Animated particles through funnel -->
+        <defs>
+          <path id="funnel-path" d="M200,70 L400,70 L400,220 L400,340 L400,420" />
+          <path id="funnel-path2" d="M600,70 L400,70 L400,220 L400,340 L400,420" />
+        </defs>
+
+        <circle r="6" class="funnel-dot">
+          <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.8s" calcMode="spline"
+            keySplines="0.2 0 0.8 1; 0.2 0 0.8 1; 0.2 0 0.8 1; 0.2 0 0.8 1">
+            <mpath href="#funnel-path" />
+          </animateMotion>
+        </circle>
+        <circle r="6" class="funnel-dot">
+          <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.6s" calcMode="spline"
+            keySplines="0.2 0 0.8 1; 0.2 0 0.8 1; 0.2 0 0.8 1; 0.2 0 0.8 1">
+            <mpath href="#funnel-path2" />
+          </animateMotion>
+        </circle>
+
+        <!-- Output drip -->
+        <g class="reveal-group" style="--d:0.9s">
+          <ellipse cx="400" cy="440" rx="22" ry="9" class="drip" />
+          <text x="400" y="475" text-anchor="middle" class="t-caption">replayable · automatic · shareable</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- ─── SLIDE 6: LIVE EXAMPLE (find-deploy-env) ─── -->
+    <div class="slide" id="s6">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+        <text x="400" y="40" text-anchor="middle" class="t-label">find-deploy-env · step by step</text>
+
+        <!-- Spine -->
+        <line x1="400" y1="60" x2="400" y2="460" class="spine" />
+
+        <!-- Step 1: ALGO -->
+        <g class="reveal-group" style="--d:0s">
+          <circle cx="400" cy="100" r="8" class="spine-dot" />
+          <line x1="392" y1="100" x2="270" y2="100" class="spine-branch" />
+          <rect x="60" y="70" width="210" height="60" class="tag-box algo-box" />
+          <text x="165" y="97"  text-anchor="middle" class="t-tag">ALGORITHM</text>
+          <text x="165" y="116" text-anchor="middle" class="t-caption">gcloud run services list</text>
+        </g>
+
+        <!-- Step 2: ALGO -->
+        <g class="reveal-group" style="--d:0.2s">
+          <circle cx="400" cy="190" r="8" class="spine-dot" />
+          <line x1="392" y1="190" x2="270" y2="190" class="spine-branch" />
+          <rect x="60" y="160" width="210" height="60" class="tag-box algo-box" />
+          <text x="165" y="187" text-anchor="middle" class="t-tag">ALGORITHM</text>
+          <text x="165" y="206" text-anchor="middle" class="t-caption">--format="value(lastTransitionTime)"</text>
+        </g>
+
+        <!-- Step 3: ALGO -->
+        <g class="reveal-group" style="--d:0.4s">
+          <circle cx="400" cy="280" r="8" class="spine-dot" />
+          <line x1="392" y1="280" x2="270" y2="280" class="spine-branch" />
+          <rect x="60" y="250" width="210" height="60" class="tag-box algo-box" />
+          <text x="165" y="277" text-anchor="middle" class="t-tag">ALGORITHM</text>
+          <text x="165" y="296" text-anchor="middle" class="t-caption">sort · skip empty · find oldest</text>
+        </g>
+
+        <!-- Step 4: LLM -->
+        <g class="reveal-group" style="--d:0.6s">
+          <circle cx="400" cy="370" r="8" class="spine-dot-llm" />
+          <line x1="408" y1="370" x2="530" y2="370" class="spine-branch-r" />
+          <rect x="530" y="340" width="210" height="60" class="tag-box llm-box" />
+          <text x="635" y="367" text-anchor="middle" class="t-tag-llm">LLM</text>
+          <text x="635" y="386" text-anchor="middle" class="t-caption">print table · selected: devN</text>
+        </g>
+
+        <!-- Animated flow dot down spine -->
+        <defs>
+          <path id="spine-path" d="M400,60 L400,460" />
+        </defs>
+        <circle r="5" class="spine-flow">
+          <animateMotion dur="2s" repeatCount="indefinite" begin="0.5s">
+            <mpath href="#spine-path" />
+          </animateMotion>
+        </circle>
+      </svg>
+    </div>
+
+    <!-- ─── SLIDE 7: GRANULAR CONTEXT EXPOSURE ─── -->
+    <div class="slide" id="s-ctx">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+
+        <text x="400" y="42" text-anchor="middle" class="t-label">put lint in the hook · not the context</text>
+
+        <!-- Left: lint rules polluting CLAUDE.md -->
+        <g class="reveal-group" style="--d:0s">
+          <rect x="35" y="58" width="305" height="310" class="box-failure" />
+          <text x="187" y="87"  text-anchor="middle" class="t-fail-label">CLAUDE.md</text>
+          <line x1="35"  y1="97"  x2="340" y2="97"  class="rule-line" />
+          <!-- lint rules = irrelevant noise for most questions -->
+          <text x="55" y="116" class="t-code c-comment">always run eslint before finishing</text>
+          <text x="55" y="134" class="t-code c-comment">enforce no-console in prod code</text>
+          <text x="55" y="152" class="t-code c-comment">prettier format on every write</text>
+          <text x="55" y="170" class="t-code c-comment">max-len: 80 chars per line</text>
+          <line x1="55" y1="182" x2="320" y2="182" class="grid-line" />
+          <text x="55" y="197" class="t-code c-comment">import/no-unused-vars</text>
+          <text x="55" y="215" class="t-code c-comment">prefer-const over let</text>
+          <line x1="55" y1="227" x2="320" y2="227" class="grid-line" />
+          <!-- the actual question, buried -->
+          <line x1="55" y1="243" x2="320" y2="243" class="connector-h" />
+          <text x="187" y="267" text-anchor="middle" class="t-code c-val">"what does X do?"</text>
+          <text x="187" y="300" text-anchor="middle" class="t-caption">lint rules irrelevant for this question</text>
+          <text x="187" y="318" text-anchor="middle" class="t-caption">loaded every turn regardless</text>
+        </g>
+
+        <g class="reveal-group" style="--d:0.2s">
+          <text x="187" y="348" text-anchor="middle" font-family="Georgia,serif" font-size="28" font-weight="700" fill="#c8c4bc">~80% noise</text>
+        </g>
+
+        <!-- VS -->
+        <g class="reveal-group" style="--d:0.38s">
+          <text x="400" y="213" text-anchor="middle" class="t-vs">vs</text>
+        </g>
+
+        <!-- Right top: clean context (just the question) -->
+        <g class="reveal-group" style="--d:0.52s">
+          <rect x="460" y="58" width="305" height="116" class="tag-box algo-box" />
+          <text x="612" y="83"  text-anchor="middle" class="t-tag">context</text>
+          <line x1="460" y1="93"  x2="765" y2="93"  class="rule-line" />
+          <text x="612" y="128" text-anchor="middle" class="t-code c-val">"what does X do?"</text>
+          <text x="612" y="156" text-anchor="middle" class="t-caption">only what this question needs</text>
+        </g>
+
+        <!-- Connector: context → hook (fires on push, not on chat) -->
+        <g class="reveal-group" style="--d:0.68s">
+          <line x1="612" y1="174" x2="612" y2="197" class="spine" />
+          <polygon points="607,193 617,193 612,204" style="fill:var(--border)" />
+          <text x="628" y="191" class="t-caption">on push</text>
+        </g>
+
+        <!-- Right bottom: pre-push hook (enforcement lives here, not in context) -->
+        <g class="reveal-group" style="--d:0.82s">
+          <rect x="460" y="204" width="305" height="124" class="tag-box algo-box" />
+          <text x="612" y="229" text-anchor="middle" class="t-tag">pre-push hook</text>
+          <line x1="460" y1="239" x2="765" y2="239" class="rule-line" />
+          <text x="480" y="268" class="t-code c-punct">#!/bin/sh</text>
+          <text x="480" y="291" class="t-code c-val">npx eslint . || exit 1</text>
+          <text x="612" y="318" text-anchor="middle" class="t-caption">enforced at push · not in chat</text>
+        </g>
+
+        <g class="reveal-group" style="--d:0.94s">
+          <text x="612" y="350" text-anchor="middle" font-family="Georgia,serif" font-size="28" font-weight="700" fill="#1a1a18">100% signal</text>
+        </g>
+
+        <!-- Tagline -->
+        <g class="reveal-group" style="--d:1.08s">
+          <line x1="80"  y1="407" x2="720" y2="407" class="rule-line" />
+          <text x="400" y="434" text-anchor="middle" class="t-caption">inject context only when relevant · move enforcement to where it belongs</text>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- ─── SLIDE 8: TAKEAWAYS ─── -->
+    <div class="slide" id="s7">
+      <svg class="slide-svg" viewBox="0 0 800 500">
+
+        <text x="400" y="46" text-anchor="middle" class="t-label">take away</text>
+        <line x1="200" y1="62" x2="600" y2="62" class="rule-line" />
+
+        <!-- 1: fetch with algorithms -->
+        <g class="reveal-group" style="--d:0.1s">
+          <circle cx="72" cy="124" r="16" class="num-circle" />
+          <text x="72" y="129" text-anchor="middle" class="t-tag">1</text>
+          <text x="106" y="118" class="t-label" style="font-size:16px">fetch with algorithms</text>
+          <text x="106" y="138" class="t-caption">git · grep · read — deterministic, zero reasoning cost</text>
+        </g>
+
+        <!-- 2: reason with LLM -->
+        <g class="reveal-group" style="--d:0.3s">
+          <circle cx="72" cy="204" r="16" class="num-circle" />
+          <text x="72" y="209" text-anchor="middle" class="t-tag">2</text>
+          <text x="106" y="198" class="t-label" style="font-size:16px">reason with LLM</text>
+          <text x="106" y="218" class="t-caption">classify · summarize · decide — where compute is justified</text>
+        </g>
+
+        <!-- 3: compose into a skill -->
+        <g class="reveal-group" style="--d:0.5s">
+          <circle cx="72" cy="284" r="16" class="num-circle" />
+          <text x="72" y="289" text-anchor="middle" class="t-tag">3</text>
+          <text x="106" y="278" class="t-label" style="font-size:16px">compose into a skill</text>
+          <text x="106" y="298" class="t-caption">name + description trigger + step sequence → SKILL.md</text>
+        </g>
+
+        <!-- 4: distil what you already do -->
+        <g class="reveal-group" style="--d:0.7s">
+          <circle cx="72" cy="364" r="16" class="num-circle" />
+          <text x="72" y="369" text-anchor="middle" class="t-tag">4</text>
+          <text x="106" y="358" class="t-label" style="font-size:16px">distil what you already do</text>
+          <text x="106" y="378" class="t-caption">do once manually → observe → codify → share with team</text>
+        </g>
+
+        <!-- Bottom tagline -->
+        <g class="reveal-group" style="--d:0.9s">
+          <line x1="200" y1="432" x2="600" y2="432" class="rule-line" />
+          <text x="400" y="460" text-anchor="middle" class="t-eyebrow">any repeated task can become a skill</text>
+        </g>
+
+      </svg>
+    </div>
+
+  </div><!-- /.deck -->
+
+  <!-- Nav -->
+  <nav class="slide-nav">
+    <button class="nav-btn" id="prev" aria-label="Previous">←</button>
+    <div class="progress-dots" id="dots"></div>
+    <button class="nav-btn" id="next" aria-label="Next">→</button>
+  </nav>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    function buildDots() {
+      const dots = document.getElementById('dots');
+      slides.forEach(() => {
+        const d = document.createElement('span');
+        d.className = 'dot';
+        dots.appendChild(d);
+      });
+    }
+
+    function updateDots() {
+      document.querySelectorAll('.dot').forEach((d, i) => {
+        d.classList.toggle('dot-active', i === current);
+      });
+    }
+
+    function go(n) {
+      slides[current].classList.remove('active');
+      current = Math.max(0, Math.min(n, slides.length - 1));
+
+      // Force CSS animation restart for reveal groups
+      slides[current].querySelectorAll('.reveal-group').forEach(g => {
+        g.style.animation = 'none';
+        void g.offsetWidth; // trigger reflow to clear forwards fill-mode
+        g.style.animation = '';
+      });
+
+      slides[current].classList.add('active');
+      updateDots();
+      document.getElementById('prev').disabled = current === 0;
+      document.getElementById('next').disabled = current === slides.length - 1;
+    }
+
+    // Touch / swipe
+    let touchX = 0;
+    document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) go(current + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+
+    document.getElementById('prev').addEventListener('click', () => go(current - 1));
+    document.getElementById('next').addEventListener('click', () => go(current + 1));
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(current + 1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(current - 1);
+    });
+
+    buildDots();
+    go(0);
+  </script>
+</body>
+</html>
