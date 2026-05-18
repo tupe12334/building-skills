@@ -437,10 +437,7 @@
     // ── State ──────────────────────────────────────────────────────────────
     const slides = document.querySelectorAll('.slide');
     let current = 0;
-    let tts = null;
-    let currentSource = null;
-    let currentAudioCtx = null;
-    let ttsState = 'idle'; // idle | loading | ready | generating | playing | error
+    let ttsState = 'idle'; // idle | ready | playing | error
 
     // ── Nav helpers ────────────────────────────────────────────────────────
     function buildDots() {
@@ -469,10 +466,7 @@
     }
 
     function go(n) {
-      if (currentSource) { try { currentSource.stop(); } catch (_) {} currentSource = null; }
-      if (ttsState === 'playing' || ttsState === 'generating') {
-        setTTSState(tts ? 'ready' : 'idle');
-      }
+      if (ttsState === 'playing') { synth.cancel(); setTTSState('ready'); }
 
       slides[current].classList.remove('active');
       current = Math.max(0, Math.min(n, slides.length - 1));
@@ -500,26 +494,32 @@
       document.getElementById('guide-icon').textContent = open ? '▼' : '▲';
     });
 
-    // ── TTS ────────────────────────────────────────────────────────────────
+    // ── TTS (Web Speech API + Kokoro fallback) ─────────────────────────────
+    const synth = window.speechSynthesis;
+    let voices = [];
+
+    function loadVoices() {
+      voices = synth.getVoices();
+    }
+    loadVoices();
+    synth.addEventListener('voiceschanged', loadVoices);
+
+    function preferredVoice() {
+      const en = voices.filter(v => v.lang.startsWith('en'));
+      return (
+        en.find(v => /Samantha|Karen|Moira|Fiona/.test(v.name)) ||
+        en.find(v => /Google/.test(v.name)) ||
+        en[0] ||
+        null
+      );
+    }
+
     function setTTSState(state) {
       ttsState = state;
       const btn = document.getElementById('speak-btn');
       btn.className = 'nav-btn tts-btn';
       btn.disabled = false;
-
       switch (state) {
-        case 'loading':
-          btn.textContent = '···';
-          btn.disabled = true;
-          btn.classList.add('tts-loading');
-          btn.title = 'Loading Kokoro TTS model (~50 MB, one-time)…';
-          break;
-        case 'generating':
-          btn.textContent = '···';
-          btn.disabled = true;
-          btn.classList.add('tts-loading');
-          btn.title = 'Synthesising speech…';
-          break;
         case 'playing':
           btn.textContent = '■';
           btn.classList.add('tts-playing');
@@ -527,68 +527,42 @@
           break;
         case 'error':
           btn.textContent = '✕';
-          btn.title = 'TTS unavailable — check console';
+          btn.title = 'TTS unavailable';
           break;
         default:
           btn.textContent = '▶';
-          btn.title = 'Read aloud (Kokoro TTS)';
+          btn.title = 'Read aloud';
       }
     }
 
-    async function ensureTTS() {
-      if (tts) return true;
-      setTTSState('loading');
-      try {
-        const { KokoroTTS } = await import('https://esm.sh/kokoro-js');
-        tts = await KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0', {
-          dtype: 'q8',
-        });
-        setTTSState('ready');
-        return true;
-      } catch (err) {
-        console.error('[Kokoro TTS]', err);
-        setTTSState('error');
-        return false;
-      }
-    }
-
-    async function handleSpeak() {
+    function handleSpeak() {
       if (ttsState === 'playing') {
-        if (currentSource) { try { currentSource.stop(); } catch (_) {} currentSource = null; }
+        synth.cancel();
         setTTSState('ready');
         return;
       }
-      if (['loading', 'generating', 'error'].includes(ttsState)) return;
+      if (ttsState === 'error') return;
 
       const text = TTS_TEXTS[current];
-      if (!text) return;
+      if (!text || !synth) return;
 
-      const ok = await ensureTTS();
-      if (!ok) return;
+      synth.cancel();
+      const utt = new SpeechSynthesisUtterance(text);
+      const v = preferredVoice();
+      if (v) utt.voice = v;
+      utt.rate = 0.88;
+      utt.pitch = 1.0;
 
-      setTTSState('generating');
-      try {
-        const audio = await tts.generate(text, { voice: 'af_bella' });
+      utt.onstart  = () => setTTSState('playing');
+      utt.onend    = () => setTTSState('ready');
+      utt.onerror  = (e) => { if (e.error !== 'interrupted') setTTSState('error'); else setTTSState('ready'); };
 
-        if (currentAudioCtx) { try { currentAudioCtx.close(); } catch (_) {} }
-        currentAudioCtx = new AudioContext({ sampleRate: audio.sampling_rate });
-        const buffer = currentAudioCtx.createBuffer(1, audio.data.length, audio.sampling_rate);
-        buffer.getChannelData(0).set(audio.data);
-
-        currentSource = currentAudioCtx.createBufferSource();
-        currentSource.buffer = buffer;
-        currentSource.connect(currentAudioCtx.destination);
-        currentSource.onended = () => { currentSource = null; setTTSState('ready'); };
-        currentSource.start();
-        setTTSState('playing');
-      } catch (err) {
-        console.error('[Kokoro TTS generate]', err);
-        setTTSState('error');
-      }
+      setTTSState('playing');
+      synth.speak(utt);
     }
 
     // ── Events ─────────────────────────────────────────────────────────────
-    document.getElementById('speak-btn').addEventListener('click', handleSpeak);
+    document.getElementById('speak-btn').addEventListener('click', () => handleSpeak());
     document.getElementById('prev').addEventListener('click', () => go(current - 1));
     document.getElementById('next').addEventListener('click', () => go(current + 1));
 
