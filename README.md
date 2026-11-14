@@ -23,6 +23,10 @@ python3 -m http.server
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which publishes the repo root to GitHub Pages.
 
+## Related Projects
+
+- [moadim](https://moadim.io/) — loop engineering: build, schedule & run agent loops (from the same author).
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
